@@ -1,0 +1,17 @@
+http {
+    ...
+    init_by_lua_file    'conf/scripts/md5_init.lua';
+    ...
+
+    server {
+        ...
+	location /test {
+	    content_by_lua '
+	        local filename = 'xxx'
+		local md5_str = md5(filename)
+		ngx.say(md5_str)
+	    ';
+	}
+	...
+    }
+}
